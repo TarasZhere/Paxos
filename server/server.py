@@ -2,6 +2,7 @@ from xmlrpc.server import SimpleXMLRPCServer
 from paxos import Paxos
 from socketserver import ThreadingMixIn
 
+# Making SimpleXMLRPCServer a threaded version of the original
 class SimpleThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer):
     pass
 

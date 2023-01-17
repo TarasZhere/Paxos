@@ -22,12 +22,12 @@ class Paxos:
         pass
 
     def sendProposal(self):
-        promises = []
+        promises = [] # An array that stores the responses of the values recived
 
         # Generate new proposal number
         proposalNumber = self.currentProposalNumber + randint(1,3)
 
-        # Send porp
+        # Send porposal in thread
         threads = [ThreadReturn(target=instance.prepare, args=[proposalNumber]) for instance in self.instances]
 
         for thread in threads:
@@ -35,6 +35,10 @@ class Paxos:
             # Giving each thread .3 second to responde
             promises.append(thread.join(0.3))
         
+        '''
+            Counting the proposals recieved
+        '''
+        print(promises)
         for response in promises:
             if response:
                 promise, latestProposal, latestValue = response
