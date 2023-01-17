@@ -32,13 +32,15 @@ class Paxos:
 
         for thread in threads:
             thread.start()
-            # Giving each thread .3 second to responde
-            promises.append(thread.join(0.3))
+
+        for thread in threads:  
+            # Giving each thread 2 second to responde
+            promises.append(thread.join(3))
         
         '''
             Counting the proposals recieved
         '''
-        print(promises)
+        print(f"Promises recieved: {promises}")
         for response in promises:
             if response:
                 promise, latestProposal, latestValue = response
@@ -61,9 +63,13 @@ class Paxos:
     
     def prepare(self, n):
 
+        print(f'Proposal {n} Recieved')
+
         promise = False
         if n > self.latestProposal: 
             promise = True
             self.latestProposal = n
+
+        print(f"Responding with promise: {promise}")
 
         return promise, self.latestProposal, self.latestValue

@@ -8,7 +8,7 @@ def testing():
     print(proxy.sendProposal())
 
 
-threads = [Thread(target=testing) for _ in range(1)]
+threads = [Thread(target=testing) for _ in range(3)]
 
 for thread in threads:
     thread.start()
