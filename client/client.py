@@ -3,9 +3,8 @@ from threading import Thread
 from random import randint
 
 def testing():
-    i = randint(0,2)
-    proxy = ServerProxy(f'http://localhost:800{i}')
-    print(proxy.sendProposal())
+    proxy = ServerProxy(f'http://localhost:8000', allow_none=True)
+    print(proxy.request(randint(0,100)))
 
 
 threads = [Thread(target=testing) for _ in range(3)]
